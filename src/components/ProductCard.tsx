@@ -1,4 +1,3 @@
-import { Label } from '@rebass/forms'
 import Link from 'next/link'
 import React from 'react'
 import { Text } from 'rebass'

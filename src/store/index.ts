@@ -2,7 +2,6 @@ import { useMemo } from 'react'
 import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunkMiddleware from 'redux-thunk'
-import { MenuState } from './menu/MenuReducers'
 import { ThemeState } from './theme/reducers'
 import reducers from './reducers'
 
@@ -10,7 +9,6 @@ let store
 
 interface IInitialState {
   theme: ThemeState
-  menu: MenuState
 }
 
 function initStore(initialState: IInitialState) {
