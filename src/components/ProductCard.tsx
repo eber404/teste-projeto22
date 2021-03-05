@@ -53,16 +53,23 @@ const ProductCard: React.FC<IProductCard> = (props: IProductCard) => {
         fontSize="16px"
         color={props.theme.colors.subTitle}
       >
-        {props.name}
+        <Link href={`/product/${props.id}`}>
+          <a>{props.name}</a>
+        </Link>
       </Text>
+
       <Box display="flex" width="100%" mt="5px">
         <SText fontSize="14px" color={props.theme.colors.title}>
-          {props.actualPrice}
-          <label>
-            {props.actualPrice !== props.regularPrice
-              ? props.regularPrice
-              : null}
-          </label>
+          <Link href={`/product/${props.id}`}>
+            <a>
+              {props.actualPrice}
+              <label>
+                {props.actualPrice !== props.regularPrice
+                  ? props.regularPrice
+                  : null}
+              </label>
+            </a>
+          </Link>
         </SText>
       </Box>
     </Flex>
