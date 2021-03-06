@@ -1,41 +1,51 @@
 import React, { useEffect } from 'react'
-import Head from 'next/head'
 import { Box } from 'rebass/styled-components'
-import styled from 'styled-components'
 import { IStyledProps } from '../interfaces/IStyledProps'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchProducts } from '../store/product/productActions'
 import Gallery from '../sections/Gallery'
 import ProductCard from '../components/ProductCard'
-import data from '../data/db.json'
+import { IReducers } from '../store/reducers'
 
 const Home: React.FC = (props: IStyledProps) => {
+  const { products } = useSelector((state: IReducers) => state)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [])
+
   return (
     <>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        flexDirection="column"
-        width="100%"
-      >
-        <Gallery {...props}>
-          {data.products.map((d, index) => {
-            return (
-              <ProductCard
-                id={index}
-                name={d.name}
-                image={d.image}
-                onSale={d.on_sale}
-                regularPrice={d.regular_price}
-                actualPrice={d.actual_price}
-                discount={d.discount_percentage}
-                sizes={d.sizes}
-                key={index}
-              />
-            )
-          })}
-        </Gallery>
-      </Box>
+      {!products.data || products.loading ? (
+        <></>
+      ) : (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"
+          width="100%"
+        >
+          <Gallery {...props}>
+            {products.data.map((product, index) => {
+              return (
+                <ProductCard
+                  id={index}
+                  name={product.name}
+                  image={product.image}
+                  onSale={product.on_sale}
+                  regularPrice={product.regular_price}
+                  actualPrice={product.actual_price}
+                  discount={product.discount_percentage}
+                  sizes={product.sizes}
+                  key={index}
+                />
+              )
+            })}
+          </Gallery>
+        </Box>
+      )}
     </>
   )
 }

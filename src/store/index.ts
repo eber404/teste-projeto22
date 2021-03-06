@@ -2,13 +2,15 @@ import { useMemo } from 'react'
 import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunkMiddleware from 'redux-thunk'
-import { ThemeState } from './theme/reducers'
 import reducers from './reducers'
+import { ThemeState } from './theme/reducers'
+import { ProductState } from './product/productReducers'
 
 let store
 
 interface IInitialState {
   theme: ThemeState
+  products: ProductState
 }
 
 function initStore(initialState: IInitialState) {
