@@ -33,7 +33,7 @@ const ProductCard: React.FC<IProductCard> = (props: IProductCard) => {
       <Link href={`/product/${props.id}`}>
         <a>
           <SBox width="380px" height="auto">
-            <SDiscount display={props.discount.length > 0 ? 'flex' : 'none'}>
+            <SDiscount display={props.onSale ? 'flex' : 'none'}>
               -{props.discount}
             </SDiscount>
             <SImage
@@ -63,11 +63,11 @@ const ProductCard: React.FC<IProductCard> = (props: IProductCard) => {
           <Link href={`/product/${props.id}`}>
             <a>
               {props.actualPrice}
-              <label>
+              <span>
                 {props.actualPrice !== props.regularPrice
                   ? props.regularPrice
                   : null}
-              </label>
+              </span>
             </a>
           </Link>
         </SText>
@@ -100,7 +100,7 @@ const SDiscount = styled(Box)`
 `
 
 const SText = styled(Text)`
-  & label {
+  & span {
     font-size: 14px;
     color: ${props => props.theme.colors.details};
     text-decoration: line-through;
