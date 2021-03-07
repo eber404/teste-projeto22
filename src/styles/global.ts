@@ -10,12 +10,12 @@ export default createGlobalStyle`
 
   body {
     background: ${props => props.theme.colors.white};
-    color: ${props => props.theme.colors.detail};
+    color: ${props => props.theme.colors.details};
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
   }
 
-  input, input, textarea, select {
+  input, textarea, select {
     outline: none;
   }
 
@@ -28,4 +28,8 @@ export default createGlobalStyle`
     text-decoration: none !important;
     color: unset !important;
   }
+
+input:focus ~ * {
+  background-color: unset !important;
+}
 `

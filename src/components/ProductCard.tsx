@@ -102,7 +102,7 @@ const SDiscount = styled(Box)`
 const SText = styled(Text)`
   & label {
     font-size: 14px;
-    color: ${props => props.theme.colors.detail};
+    color: ${props => props.theme.colors.details};
     text-decoration: line-through;
     padding-left: 10px;
   }

@@ -67,7 +67,7 @@ const Product: React.FC<IStyledProps> = props => {
                   marginRight="20px"
                   color={
                     s.available
-                      ? props.theme.colors.detail
+                      ? props.theme.colors.details
                       : props.theme.colors.foreground
                   }
                 >
@@ -169,7 +169,7 @@ const SText = styled(Text)`
 
   & label {
     font-size: 14px;
-    color: ${props => props.theme.colors.detail};
+    color: ${props => props.theme.colors.details};
     padding-left: 10px;
   }
 `

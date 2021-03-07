@@ -9,10 +9,9 @@ const light = {
     primary: '#483BFF',
     title: '#3D464F',
     subTitle: '#6F8090',
-    detail: '#A9B3BC',
+    details: '#A9B3BC',
     foreground: '#e9e9e9',
     background: '#CAD1D6 ',
-    offWhite: '#fdfdfd',
     white: '#fff'
   }
 }
