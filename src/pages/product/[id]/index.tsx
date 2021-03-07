@@ -59,15 +59,24 @@ const Product: React.FC<IStyledProps> = props => {
           </Text>
           <Box display="flex">
             {product.sizes.map((s, index) => {
-              if (!s.available) return
               return (
                 <Label
                   key={index}
                   display="flex"
                   alignItems="center"
                   marginRight="20px"
+                  color={
+                    s.available
+                      ? props.theme.colors.detail
+                      : props.theme.colors.foreground
+                  }
                 >
-                  <Radio name="size" id={s.sku} value={s.size}></Radio>
+                  <Radio
+                    name="size"
+                    id={s.sku}
+                    value={s.size}
+                    disabled={!s.available}
+                  ></Radio>
                   {s.size}
                 </Label>
               )
@@ -116,6 +125,7 @@ const Division = styled(Box)`
 
 const SButton = styled(Button)`
   background-color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.white} !important;
   cursor: pointer;
 `
 

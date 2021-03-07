@@ -25,7 +25,7 @@ export default createGlobalStyle`
   select,
   a {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
-    text-decoration: none;
-    color: unset;
+    text-decoration: none !important;
+    color: unset !important;
   }
 `
