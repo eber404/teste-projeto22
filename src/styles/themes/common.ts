@@ -1,6 +1,5 @@
 // common theme preset
 const common = {
-  breakpoints: ['40em', '52em', '64em'],
   fonts: {
     body: 'Open Sans, system-ui, sans-serif',
     heading: 'inherit',

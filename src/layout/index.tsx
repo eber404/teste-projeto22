@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { dark, light } from '../styles/themes'
 import { IReducers } from '../store/reducers'
 import { IStyledProps } from '../interfaces/IStyledProps'
 import Header from './Header'
+import { fetchProducts } from '../store/product/productActions'
 
 const Layout: React.FC<IStyledProps> = (props: IStyledProps) => {
   const { theme } = useSelector((state: IReducers) => state)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [])
+
   return (
     <ThemeProvider theme={theme.dark ? dark : light}>
       <SBox>
@@ -34,6 +42,7 @@ const Main = styled.div`
   max-width: 1280px;
   width: 100%;
   height: 100%;
+  padding-top: 25px;
 `
 
 export default Layout

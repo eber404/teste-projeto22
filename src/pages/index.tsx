@@ -1,19 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Box } from 'rebass/styled-components'
 import { IStyledProps } from '../interfaces/IStyledProps'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts } from '../store/product/productActions'
+import { useSelector } from 'react-redux'
 import Gallery from '../sections/Gallery'
 import ProductCard from '../components/ProductCard'
 import { IReducers } from '../store/reducers'
 
 const Home: React.FC = (props: IStyledProps) => {
   const { products } = useSelector((state: IReducers) => state)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(fetchProducts())
-  }, [])
 
   return (
     <>
