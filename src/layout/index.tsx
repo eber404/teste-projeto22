@@ -8,7 +8,9 @@ import Header from './Header'
 import { fetchProducts } from '../store/product/productActions'
 
 const Layout: React.FC<IStyledProps> = (props: IStyledProps) => {
-  const { theme } = useSelector((state: IReducers) => state)
+  const { theme, ...store } = useSelector((state: IReducers) => state)
+
+  console.log('layout', store)
 
   const dispatch = useDispatch()
 

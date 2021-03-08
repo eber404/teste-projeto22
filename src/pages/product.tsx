@@ -1,22 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { useSelector } from 'react-redux'
-import { IReducers } from '../../../store/reducers'
+import { useDispatch, useSelector } from 'react-redux'
+import { IReducers } from '../store/reducers'
 import { Box, Flex } from 'reflexbox'
-import { IProduct } from '../../../interfaces/IProduct'
+import { IProduct } from '../interfaces/IProduct'
 import styled, { withTheme } from 'styled-components'
 import { Button, Text } from 'rebass'
-import { IStyledProps } from '../../../interfaces/IStyledProps'
+import { IStyledProps } from '../interfaces/IStyledProps'
 import { Label, Radio } from '@rebass/forms'
 import { up, down, between, only } from 'styled-breakpoints'
+import { addToCart } from '../store/cart/cartActions'
 
 const Product: React.FC<IStyledProps> = props => {
+  const dispatch = useDispatch()
+
   const [product, setProduct] = useState<IProduct>(null)
+  const [sizeSku, setSizeSKu] = useState<string>(null)
 
   const router = useRouter()
   const { id } = router.query
 
   const { products } = useSelector((state: IReducers) => state)
+
+  const handleOrder = () => {
+    const order = {
+      productId: +id,
+      sizeSku: sizeSku
+    }
+
+    dispatch(addToCart(order))
+  }
 
   useEffect(() => {
     if (!products.loading && products.data && id) {
@@ -76,6 +89,7 @@ const Product: React.FC<IStyledProps> = props => {
                     id={s.sku}
                     value={s.size}
                     disabled={!s.available}
+                    onClick={() => setSizeSKu(s.sku)}
                   ></Radio>
                   {s.size}
                 </Label>
@@ -88,7 +102,7 @@ const Product: React.FC<IStyledProps> = props => {
             {product.actual_price}
             <label>{product.installments}</label>
           </SText>
-          <SButton>Comprar</SButton>
+          <SButton onClick={() => handleOrder()}>Comprar</SButton>
         </Division>
       </SBox>
     </SFlex>

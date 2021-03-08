@@ -30,7 +30,7 @@ const ProductCard: React.FC<IProductCard> = (props: IProductCard) => {
       flexDirection="column"
       marginBottom="30px"
     >
-      <Link href={`/product/${props.id}`}>
+      <Link href={`/product?id=${props.id}`}>
         <a>
           <SBox width="380px" height="auto">
             <SDiscount display={props.onSale ? 'flex' : 'none'}>
@@ -53,14 +53,14 @@ const ProductCard: React.FC<IProductCard> = (props: IProductCard) => {
         fontSize="16px"
         color={props.theme.colors.subTitle}
       >
-        <Link href={`/product/${props.id}`}>
+        <Link href={`/product?id=${props.id}`}>
           <a>{props.name}</a>
         </Link>
       </Text>
 
       <Box display="flex" width="100%" mt="5px">
         <SText fontSize="14px" color={props.theme.colors.title}>
-          <Link href={`/product/${props.id}`}>
+          <Link href={`/product?id=${props.id}`}>
             <a>
               {props.actualPrice}
               <span>
