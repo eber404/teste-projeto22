@@ -12,12 +12,14 @@ const Cart: React.FC<IStyledProps> = (props: IStyledProps) => {
   const [amount, setAmount] = useState(0)
 
   useEffect(() => {
-    const prices = cart.orders.map(order =>
-      parseFloat(order.price.replace('R$', '').replace(',', '.').trim())
-    )
+    if (cart.orders.length > 0) {
+      const prices = cart.orders.map(order =>
+        parseFloat(order.price.replace('R$', '').replace(',', '.').trim())
+      )
 
-    const total = prices.reduce((total = 0, value = 0) => (total += value))
-    setAmount(total)
+      const total = prices.reduce((total = 0, value = 0) => (total += value))
+      setAmount(total)
+    }
   }, [])
 
   return (
@@ -52,6 +54,7 @@ const Cart: React.FC<IStyledProps> = (props: IStyledProps) => {
       </Box>
       <Box display="flex">
         <Text
+          display={cart.orders.length > 0 ? 'flex' : 'none'}
           marginTop="20px"
           fontSize="20px"
           color={props.theme.colors.primary}
