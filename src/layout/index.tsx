@@ -11,8 +11,6 @@ import { down } from 'styled-breakpoints'
 const Layout: React.FC<IStyledProps> = (props: IStyledProps) => {
   const { theme, ...store } = useSelector((state: IReducers) => state)
 
-  console.log('layout', store)
-
   const dispatch = useDispatch()
 
   useEffect(() => {

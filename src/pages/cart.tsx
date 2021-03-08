@@ -10,12 +10,6 @@ import { withTheme } from 'styled-components'
 const Cart: React.FC<IStyledProps> = (props: IStyledProps) => {
   const { cart, products } = useSelector((state: IReducers) => state)
 
-  
-
-  useEffect(() => {
-    console.log('cart.orders', cart.orders)
-  }, [])
-
   return (
     <Flex width="100%" maxWidth="400px" justifyContent="center">
       <Box
