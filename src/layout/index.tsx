@@ -6,6 +6,7 @@ import { IReducers } from '../store/reducers'
 import { IStyledProps } from '../interfaces/IStyledProps'
 import Header from './Header'
 import { fetchProducts } from '../store/product/productActions'
+import { down } from 'styled-breakpoints'
 
 const Layout: React.FC<IStyledProps> = (props: IStyledProps) => {
   const { theme, ...store } = useSelector((state: IReducers) => state)
@@ -45,6 +46,10 @@ const Main = styled.div`
   width: 100%;
   height: 100%;
   padding-top: 25px;
+
+  ${down('md')} {
+    padding-top: 0px;
+  }
 `
 
 export default Layout

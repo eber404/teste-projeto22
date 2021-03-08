@@ -11,6 +11,7 @@ import { Label, Radio } from '@rebass/forms'
 import { up, down, between, only } from 'styled-breakpoints'
 import { addToCart } from '../store/cart/cartActions'
 import { IOrder } from '../interfaces/IOrder'
+import { breakpoints } from '../styles/media'
 
 const Product: React.FC<IStyledProps> = props => {
   const dispatch = useDispatch()
@@ -45,7 +46,7 @@ const Product: React.FC<IStyledProps> = props => {
   return !product ? (
     <></>
   ) : (
-    <SFlex px="50px" width="100%" justifyContent="center">
+    <SFlex>
       <ImageBox width="100%" maxWidth="380px" style={{ position: 'relative' }}>
         <SImage src={product.image}></SImage>
         <Overlay />
@@ -64,28 +65,24 @@ const Product: React.FC<IStyledProps> = props => {
           himenaeos.
         </Description>
         <Division>
-          <Text
+          <MText
             fontSize="12px"
             fontWeight="700"
             color={props.theme.colors.subTitle}
-            display="flex"
             alignItems="center"
           >
             TAMANHOS
-          </Text>
+          </MText>
           <Box display="flex">
             {product.sizes.map((s, index) => {
+              if (!s.available) return
               return (
                 <Label
                   key={index}
                   display="flex"
                   alignItems="center"
                   marginRight="20px"
-                  color={
-                    s.available
-                      ? props.theme.colors.details
-                      : props.theme.colors.foreground
-                  }
+                  color={props.theme.colors.details}
                 >
                   <Radio
                     name="size"
@@ -100,7 +97,7 @@ const Product: React.FC<IStyledProps> = props => {
             })}
           </Box>
         </Division>
-        <Division>
+        <Division flexDirection={down('md') ? 'column' : 'row'}>
           <SText>
             {product.actual_price}
             <label>{product.installments}</label>
@@ -119,7 +116,12 @@ const SBox = styled(Box)`
 `
 
 const SFlex = styled(Flex)`
+  padding: 0 50px;
+  width: 100%;
+  justify-content: center;
+
   ${down('md')} {
+    padding: 0 20px;
     flex-direction: column;
     align-items: center;
   }
@@ -132,18 +134,35 @@ const ImageBox = styled(Box)`
   }
 `
 
+const MText = styled(Text)`
+  display: flex;
+  ${down('md')} {
+    display: none !important;
+  }
+`
+
 const Division = styled(Box)`
   display: flex;
   justify-content: space-between;
   margin-top: 20px !important;
   padding-top: 20px !important;
   border-top: 1px solid ${props => props.theme.colors.foreground};
+  ${down('md')} {
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
 `
 
 const SButton = styled(Button)`
   background-color: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.white} !important;
+  margin-top: 15px !important;
   cursor: pointer;
+
+  ${down('md')} {
+    width: 100%;
+  }
 `
 
 const Title = styled.h1`

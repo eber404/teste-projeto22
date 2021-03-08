@@ -9,7 +9,7 @@ interface IOrderCard extends IStyledProps, IOrder {}
 
 const OrderCard: React.FC<IOrderCard> = (props: IOrderCard) => {
   return (
-    <Flex padding="15px" alignItems="center" width="100%">
+    <Flex padding="15px" alignItems="center" width="100%" flexWrap="wrap">
       <Box height="100px" width="auto">
         <SImage src={props.image}></SImage>
       </Box>
