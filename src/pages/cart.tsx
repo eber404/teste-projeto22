@@ -9,9 +9,24 @@ import { withTheme } from 'styled-components'
 
 const Cart: React.FC<IStyledProps> = (props: IStyledProps) => {
   const { cart, products } = useSelector((state: IReducers) => state)
+  const [amount, setAmount] = useState(0)
+
+  useEffect(() => {
+    const prices = cart.orders.map(order =>
+      parseFloat(order.price.replace('R$', '').replace(',', '.').trim())
+    )
+
+    const total = prices.reduce((total = 0, value = 0) => (total += value))
+    setAmount(total)
+  }, [])
 
   return (
-    <Flex width="100%" maxWidth="400px" justifyContent="center">
+    <Flex
+      width="100%"
+      maxWidth="400px"
+      justifyContent="center"
+      flexDirection="column"
+    >
       <Box
         display="flex"
         justifyContent="center"
@@ -34,6 +49,15 @@ const Cart: React.FC<IStyledProps> = (props: IStyledProps) => {
             Carrinho vazio.
           </Text>
         )}
+      </Box>
+      <Box display="flex">
+        <Text
+          marginTop="20px"
+          fontSize="20px"
+          color={props.theme.colors.primary}
+        >
+          Total: <span>R$ {amount.toFixed(2)}</span>
+        </Text>
       </Box>
     </Flex>
   )

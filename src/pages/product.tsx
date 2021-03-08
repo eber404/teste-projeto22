@@ -75,14 +75,13 @@ const Product: React.FC<IStyledProps> = props => {
           </MText>
           <Box display="flex">
             {product.sizes.map((s, index) => {
-              if (!s.available) return
               return (
                 <Label
                   key={index}
                   display="flex"
                   alignItems="center"
                   marginRight="20px"
-                  color={props.theme.colors.details}
+                  color={s.available ? props.theme.colors.details : 'tomato'}
                 >
                   <Radio
                     name="size"
