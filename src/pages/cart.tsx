@@ -1,22 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Box, Flex } from 'reflexbox'
-import { order } from 'styled-system'
 import OrderCard from '../components/OrderCard'
 import { IReducers } from '../store/reducers'
+import { Text } from 'rebass'
+import { IStyledProps } from '../interfaces/IStyledProps'
+import { withTheme } from 'styled-components'
 
-const Cart: React.FC = props => {
+const Cart: React.FC<IStyledProps> = (props: IStyledProps) => {
   const { cart, products } = useSelector((state: IReducers) => state)
+
+  
 
   useEffect(() => {
     console.log('cart.orders', cart.orders)
   }, [])
 
   return (
-    <Flex width="100%">
-      <Box width="100%" maxHeight="400px">
-        <ul>
-          {cart.orders.map((order, index) => (
+    <Flex width="100%" maxWidth="400px" justifyContent="center">
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        width="100%"
+        flexDirection="column"
+      >
+        {cart.orders.length > 0 ? (
+          cart.orders.map((order, index) => (
             <OrderCard
               image={order.image}
               name={order.name}
@@ -24,10 +34,14 @@ const Cart: React.FC = props => {
               size={order.size}
               key={index}
             />
-          ))}
-        </ul>
+          ))
+        ) : (
+          <Text color={props.theme.colors.details} fontWeight={400}>
+            Carrinho vazio.
+          </Text>
+        )}
       </Box>
     </Flex>
   )
 }
-export default Cart
+export default withTheme(Cart)

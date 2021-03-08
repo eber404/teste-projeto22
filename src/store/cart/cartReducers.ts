@@ -1,3 +1,5 @@
+import { IOrder } from '../../interfaces/IOrder'
+import { groupBy } from '../../utils/groupBy'
 import * as cartTypes from './cartTypes'
 import { ICartAction, ICartState } from './cartTypes'
 
@@ -12,6 +14,7 @@ export const cartReducer = (
   switch (actions.type) {
     case cartTypes.ADD_TO_CART: {
       const orders = [...state.orders]
+
       orders.push(actions.payload)
       return { ...state, orders }
     }
@@ -19,7 +22,7 @@ export const cartReducer = (
       return {
         ...state,
         orders: state.orders.filter(
-          order => order.productId !== actions.payload.productId
+          order => order.name !== actions.payload.name
         )
       }
     }

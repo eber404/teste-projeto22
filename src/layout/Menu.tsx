@@ -10,12 +10,6 @@ const Menu: React.FC = () => {
       <Link href="/">
         <Anchor>Home</Anchor>
       </Link>
-      <Link href="/blog">
-        <Anchor>Blog</Anchor>
-      </Link>
-      <Link href="/contato">
-        <Anchor>Contato</Anchor>
-      </Link>
     </Flex>
   )
 }
