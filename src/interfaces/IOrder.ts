@@ -1,4 +1,6 @@
 export interface IOrder {
-  productId: number
-  sizeSku: string
+  name: string
+  image: string
+  price: string
+  size: string
 }

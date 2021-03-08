@@ -10,12 +10,13 @@ import { IStyledProps } from '../interfaces/IStyledProps'
 import { Label, Radio } from '@rebass/forms'
 import { up, down, between, only } from 'styled-breakpoints'
 import { addToCart } from '../store/cart/cartActions'
+import { IOrder } from '../interfaces/IOrder'
 
 const Product: React.FC<IStyledProps> = props => {
   const dispatch = useDispatch()
 
   const [product, setProduct] = useState<IProduct>(null)
-  const [sizeSku, setSizeSKu] = useState<string>(null)
+  const [size, setSize] = useState<string>(null)
 
   const router = useRouter()
   const { id } = router.query
@@ -23,9 +24,11 @@ const Product: React.FC<IStyledProps> = props => {
   const { products } = useSelector((state: IReducers) => state)
 
   const handleOrder = () => {
-    const order = {
-      productId: +id,
-      sizeSku: sizeSku
+    const order: IOrder = {
+      name: product.name,
+      image: product.image,
+      price: product.actual_price,
+      size
     }
 
     dispatch(addToCart(order))
@@ -89,7 +92,7 @@ const Product: React.FC<IStyledProps> = props => {
                     id={s.sku}
                     value={s.size}
                     disabled={!s.available}
-                    onClick={() => setSizeSKu(s.sku)}
+                    onClick={() => setSize(s.size)}
                   ></Radio>
                   {s.size}
                 </Label>

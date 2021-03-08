@@ -1,30 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Box, Flex } from 'reflexbox'
-import { IProduct } from '../interfaces/IProduct'
+import { order } from 'styled-system'
+import OrderCard from '../components/OrderCard'
 import { IReducers } from '../store/reducers'
 
 const Cart: React.FC = props => {
-  const [itemsOnCart, setItemsOnCart] = useState<IProduct[]>([])
   const { cart, products } = useSelector((state: IReducers) => state)
 
   useEffect(() => {
-    cart.orders.map(order => {
-      const item = products.data.find((p, index) => order.productId === index)
-
-      setItemsOnCart([...itemsOnCart, item])
-    })
-  }, [cart.orders])
+    console.log('cart.orders', cart.orders)
+  }, [])
 
   return (
-    <Flex>
+    <Flex width="100%">
       <Box width="100%" maxHeight="400px">
         <ul>
-          {!itemsOnCart ? (
-            <></>
-          ) : (
-            itemsOnCart.map((item, index) => <li key={index}>{item.name}</li>)
-          )}
+          {cart.orders.map((order, index) => (
+            <OrderCard
+              image={order.image}
+              name={order.name}
+              price={order.price}
+              size={order.size}
+              key={index}
+            />
+          ))}
         </ul>
       </Box>
     </Flex>
